@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sprinkler Control</title>
+    <script type="text/javascript" src="/webiopi.js"></script>
+    <script type="text/javascript">
+    webiopi().ready(function() {
+        // Create variables for each zone
+        var btnZone1 = webiopi().createGPIOButton(2, "Zone 1");
+		var btnZone2 = webiopi().createGPIOButton(3, "Zone 2");
+		var btnZone3 = webiopi().createGPIOButton(4, "Zone 3");
+		var btnZone4 = webiopi().createGPIOButton(17, "Zone 4");
+		// change the 8 to the "rain-bypass" pin
+		var weatherCheck = webiopi().createGPIOButton(8, "Forecast Status");
+
+		//check if the buttons are powered. This will display a button indicating the weather status
+		function checkStatus() {
+				if ($('#gpio8').hasClass('LOW')){
+					$("#gpio8").html('Rain');
+					}else {
+						$("#gpio8").html('Powered');
+					}
+				setTimeout(checkStatus,1000)
+				}
+		
+		// set GPIO pins to "OUT"
+		webiopi().setFunction(2,"out");
+		webiopi().setFunction(3,"out");
+		webiopi().setFunction(4,"out");
+		webiopi().setFunction(17,"out");
+		
+        // Append button to HTML element using jQuery
+        $("#control1").append(btnZone1);
+		$("#control2").append(btnZone2);
+		$("#control3").append(btnZone3);
+		$("#control4").append(btnZone4);
+		$("#weatherCheck").append(weatherCheck);
+
+        // Refresh GPIO buttons
+        // pass true to refresh repeatedly or false to refresh once
+                webiopi().refreshGPIO(true);
+    });
+
+    </script>
+    <style type="text/css">
+		body {
+			font-family: Arial, Helvetica, Sans-Serif;
+			padding: 0px;
+			margin: 0px;
+			background: #CCCCCC;
+		}
+        button {
+			display: block;
+			margin: 10px 10px;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 0px;
+			width: 300px;
+			height: 50px;
+			font-size: 24pt;
+			font-weight: bold;
+			color: white;
+			border-radius: 10px !important;
+        }
+		#header {
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 0px !important;
+			padding-top: 0px !important;
+		}
+		h2 {
+			text-align: center;			
+			margin-top: 0px !important;
+			margin-bottom: 10px !important;
+		}
+		#gpio8.LOW {
+			color: #FFFFFF !important;
+		}
+		#gpio8.HIGH {
+			color: #FFFFFF !important;
+		}
+		#weatherCheck {
+			width: 300px;
+			height: 60px;
+		}
+    </style>
+</head>
+<body>
+    <div id="header"><h2>Sprinkler Control</h2></div>
+    <div id="control1" align="center"></div>
+	<div id="control2" align="center"></div>
+	<div id="control3" align="center"></div>
+	<div id="control4" align="center"></div>
+	<div id="weatherCheck" style="margin-left: auto; margin-right: auto; position:relative"></div>
+</body>
+</html>
