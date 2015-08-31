@@ -1,5 +1,5 @@
 # raspberrySprinkler
-This project allows one to control a number of "zones" using WebIOPi, python . 
+This project allows control of a number of "zones" using WebIOPi and a little python. Thanks to thirdeyevis for the start on some code, and the idea.
 
   Instructions:
 
@@ -9,7 +9,7 @@ This project allows one to control a number of "zones" using WebIOPi, python .
 2. Install WebIOPi
   http://webiopi.trouch.com/INSTALL.html
 
-3. Copy the sprinklers.html file to the WebIOPi doc-root "HTML" directory:
+3. Copy the sprinklers.html file to the WebIOPi doc-root "HTML" directory (default: /usr/share/webiopi/htdocs/)
   
 4. Edit the integers in the js to change the active GPIO pins: 
   var btnZone1 = webiopi().createGPIOButton(2, "Zone 1");
@@ -42,3 +42,7 @@ This project allows one to control a number of "zones" using WebIOPi, python .
 14. Reboot
 
 The result should be a working webpage to control your GPIO pins per "zone" manually, a cron job that will start the zones only if the weather permits, and a log file being generated with the weeks forecast.
+
+Plans: 
+  1. Integrate some weather sensors/webcam into the mix for display on the sprinklers.html webpage
+  2. rewrite the java in the sprinklers.html file (my java is very rusty) 
