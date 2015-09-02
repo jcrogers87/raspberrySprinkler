@@ -52,7 +52,6 @@ try: ## see if config file exists
 	configFile.close()
 	
 except: ## Exception: config file does not exist, create new
-    WriteLog("Config file not found, creating new...")
     print "Config file not found, creating new..."
 
     ## Request zip code for request
